@@ -1,0 +1,23 @@
+### GET /usuarios: Lista todos los usuarios.
+GET http://localhost:1234/
+### POST /usuarios: Crea un nuevo usuario (validar que el email sea válido y la edad mayor a 18).
+POST http://localhost:1234/usuarios
+Content-Type: application/json
+
+{
+    "nombre": "Marta",
+    "email": "marta@gmail.com",
+    "edad": 23
+}
+### GET /usuarios/:id: Obtiene un usuario por su ID.
+GET http://localhost:1234/usuarios/1
+### PUT /usuarios/:id: Actualiza la información de un usuario.
+PUT http://localhost:1234/usuarios/1
+Content-Type: application/json
+
+{
+    "nombre": "Leandro",
+    "email": "leandro@gmail.com"
+}
+### DELETE /usuarios/:id: Elimina un usuario.
+DELETE http://localhost:1234/usuarios/1

@@ -1,0 +1,6 @@
+# Ignorar 
+node_modules/
+api-citas-celebres/
+api-clima-coordenadas/
+api-tareas-crud/
+api-crud-mongodb/.env
