@@ -1,4 +1,13 @@
 const express = require("express");
+const router = express.Router();
+const {
+  validarCreacionTarea,
+  validarActualizarTarea,
+  validarTarea,
+  validarEliminarPorEstado,
+  validarIdUsuario
+} = require('../middlewares/validacionTarea')
+const manejarErrores = require('../middlewares/manejarErrores')
 const {
   crearTarea,
   obtenerTarea,
@@ -7,18 +16,21 @@ const {
   eliminarTarea,
   actualizarTareasPendientes,
   eliminarTareasPorUsuario,
-  eliminarTareaPorEstado
+  eliminarTareaPorEstado,
+  obtenerTareasPaginadas,
+  obtenerTareasPaginadasPorUsuario
 } = require("../controladores/tareaControlador");
 
-const router = express.Router();
 
 router.get("/tareas", obtenerTarea);
-router.get("/tareas/usuario/:idUsuario", obtenerTareasPorUsuario);
-router.post("/tareas", crearTarea);
-router.put("/tareas/:id", actualizarTarea);
-router.put('/tareas/usuario/:idUsuario/actualizar-pendientes', actualizarTareasPendientes)
-router.delete("/tareas/:id", eliminarTarea);
-router.delete('/tareas/usuario/:idUsuario/eliminar', eliminarTareasPorUsuario)
-router.delete('/tareas/usuario/:idUsuario/eliminar-por-estado', eliminarTareaPorEstado)
+router.get("/tareas/paginadas", obtenerTareasPaginadas)
+router.get("/tareas/usuario/:idUsuario", validarIdUsuario, manejarErrores, obtenerTareasPorUsuario);
+router.get("/tareas/usuario/:idUsuario/paginadas", validarIdUsuario, manejarErrores, obtenerTareasPaginadasPorUsuario)
+router.post("/tareas", validarCreacionTarea, manejarErrores, crearTarea);
+router.put("/tareas/:id", validarActualizarTarea, manejarErrores, actualizarTarea);
+router.put('/tareas/usuario/:idUsuario/actualizar-pendientes', validarIdUsuario, manejarErrores, actualizarTareasPendientes)
+router.delete("/tareas/:id", validarTarea, manejarErrores, eliminarTarea);
+router.delete('/tareas/usuario/:idUsuario/eliminar', validarIdUsuario, manejarErrores, eliminarTareasPorUsuario)
+router.delete('/tareas/usuario/:idUsuario/eliminar-por-estado', validarEliminarPorEstado, manejarErrores, eliminarTareaPorEstado)
 
 module.exports = router;

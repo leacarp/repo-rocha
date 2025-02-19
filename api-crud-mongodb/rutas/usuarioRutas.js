@@ -1,18 +1,24 @@
 // La carpeta rutas/routes es donde definimos que rutas usaran los controladores (CRUD) para interactuar con la base de datos
-
 const express = require("express");
+const router = express.Router();
 const {
   crearUsuario,
   obtenerUsuario,
   actualizarUsuario,
   eliminarUsuario,
 } = require("../controladores/usuarioControlador");
+const manejarErrores = require('../middlewares/manejarErrores')
+const {
+  validarCreacionUsuario,
+    validarUsuario,
+    validarActualizarUsuario
+} = require('../middlewares/validacionUsuario')
 
-const router = express.Router();
+
 
 router.get("/usuarios", obtenerUsuario);
-router.post("/usuarios", crearUsuario);
-router.put("/usuarios/:id", actualizarUsuario);
-router.delete("/usuarios/:id", eliminarUsuario);
+router.post("/usuarios", validarCreacionUsuario, manejarErrores, crearUsuario);
+router.put("/usuarios/:id", validarActualizarUsuario, manejarErrores, actualizarUsuario);
+router.delete("/usuarios/:id", validarUsuario, manejarErrores, eliminarUsuario);
 
 module.exports = router;

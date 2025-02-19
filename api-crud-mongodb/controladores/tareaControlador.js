@@ -1,6 +1,5 @@
-const Usuario = require('../modelos/usuarioModelo')
+const Usuario = require("../modelos/usuarioModelo");
 const Tarea = require("../modelos/tareaModelo");
-
 
 /**
  * Asi seria en SQLServer:
@@ -10,31 +9,30 @@ const Tarea = require("../modelos/tareaModelo");
 const crearTarea = async (req, res) => {
   try {
     const { titulo, descripcion, estado, usuarioId } = req.body;
-    
-    const nuevaTarea = new Tarea({ 
-        titulo, 
-        descripcion, 
-        estado,
-        usuario: usuarioId 
-      });  // Referencia al ID del usuario que creó la tarea (clave foránea)
-      await nuevaTarea.save();
-      
-      const usuario = await Usuario.findById(usuarioId);
-      if (!usuario) {
-        return res.status(404).json({ message: "Usuario no encontrado" });
-      }
-      
-      // Agregamos el _id de la tarea al array de tareas del usuario
-      usuario.tareas.push(nuevaTarea._id);
-      // Guardamos el usuario actualizado
-      await usuario.save();
+
+    const nuevaTarea = new Tarea({
+      titulo,
+      descripcion,
+      estado,
+      usuario: usuarioId,
+    }); // Referencia al ID del usuario que creó la tarea (clave foránea)
+    await nuevaTarea.save();
+
+    const usuario = await Usuario.findById(usuarioId);
+    if (!usuario) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    // Agregamos el _id de la tarea al array de tareas del usuario
+    usuario.tareas.push(nuevaTarea._id);
+    // Guardamos el usuario actualizado
+    await usuario.save();
 
     res.status(201).json({ message: "Tarea creada con exito", nuevaTarea });
   } catch (e) {
     res.status(400).json({ message: "Error al crear la tarea" });
   }
 };
-
 
 /**
  * Asi seria en SQLServer:
@@ -44,13 +42,12 @@ const crearTarea = async (req, res) => {
  */
 const obtenerTarea = async (req, res) => {
   try {
-    const tareas = await Tarea.find().populate('usuario', 'nombre correo'); // .populate("usuario", "nombre correo") es para hacer un "join" entre la colección
+    const tareas = await Tarea.find().populate("usuario", "nombre correo"); // .populate("usuario", "nombre correo") es para hacer un "join" entre la colección
     res.status(200).json({ message: "Lista de tareas", tareas });
   } catch (e) {
     res.status(400).json({ message: "Error al obtener la tarea", error });
   }
 };
-
 
 /**
  * Asi seria en SQLServer:
@@ -59,22 +56,26 @@ const obtenerTarea = async (req, res) => {
     JOIN usuarios ON tareas.usuario = usuarios.id
     WHERE usuarios.id = @idUsuario;
  */
-    const obtenerTareasPorUsuario = async (req, res) => {
-      const { idUsuario } = req.params; // Obtenemos el ID del usuario de los parámetros de la URL
-    
-      try {
-        const usuario = await Usuario.findById(idUsuario).populate('tareas'); // Usamos el método populate para traer las tareas asociadas al usuario
+const obtenerTareasPorUsuario = async (req, res) => {
+  const { idUsuario } = req.params; // Obtenemos el ID del usuario de los parámetros de la URL
 
-        if (!usuario) {
-          return res.status(404).json({ message: "Usuario no encontrado" });
-        }
-    
-        res.status(200).json({ message: `Tareas del usuario ${usuario.nombre}`, tareas: usuario.tareas });
-      } catch (error) {
-        res.status(400).json({ message: "Error al obtener las tareas", error });
-      }
-    };
+  try {
+    const usuario = await Usuario.findById(idUsuario).populate("tareas"); // Usamos el método populate para traer las tareas asociadas al usuario
 
+    if (!usuario) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    res
+      .status(200)
+      .json({
+        message: `Tareas del usuario ${usuario.nombre}`,
+        tareas: usuario.tareas,
+      });
+  } catch (error) {
+    res.status(400).json({ message: "Error al obtener las tareas", error });
+  }
+};
 
 /**
  * Asi seria en SQLServer:
@@ -87,7 +88,8 @@ const actualizarTarea = async (req, res) => {
     const { id } = req.params;
     const { titulo, descripcion, estado, usuarioId } = req.body;
     try {
-      const tareaActualizada = await Tarea.findByIdAndUpdate( // Este método busca una tarea por su ID y la actualiza con los nuevos datos.
+      const tareaActualizada = await Tarea.findByIdAndUpdate(
+        // Este método busca una tarea por su ID y la actualiza con los nuevos datos.
         id,
         { titulo, descripcion, estado, usuario: usuarioId },
         { new: true }
@@ -100,11 +102,18 @@ const actualizarTarea = async (req, res) => {
         .json({ message: "Tarea actualizada con exito", tareaActualizada });
     } catch (error) {
       console.log(error);
-      res.status(400).json({ message: "Error al actualizar la tarea", error: error.message });
+      res
+        .status(400)
+        .json({
+          message: "Error al actualizar la tarea",
+          error: error.message,
+        });
     }
   } catch (error) {
-    console.log(error)
-    res.status(400).json({ message: "Error al actualizar la tarea", error: error.message });
+    console.log(error);
+    res
+      .status(400)
+      .json({ message: "Error al actualizar la tarea", error: error.message });
   }
 };
 
@@ -116,26 +125,34 @@ const actualizarTarea = async (req, res) => {
     WHERE usuarioId = @idUsuario AND estado = 'pendiente';
  */
 const actualizarTareasPendientes = async (req, res) => {
-  const {idUsuario} = req.params
-  try{
-    const tareasActualizadas = await Tarea.updateMany( // Con updateMany actualizamos muchas tareas ala vez
-      {usuario: idUsuario, estado: "pendiente"}, // Filtro si el estado de la tarea es pendiente
-      {$set: {estado: 'completada'}} // Con $set asignamos al estado a completada
-    )
+  const { idUsuario } = req.params;
+  try {
+    const tareasActualizadas = await Tarea.updateMany(
+      // Con updateMany actualizamos muchas tareas ala vez
+      { usuario: idUsuario, estado: "pendiente" }, // Filtro si el estado de la tarea es pendiente
+      { $set: { estado: "completada" } } // Con $set asignamos al estado a completada
+    );
 
-
-    if(tareasActualizadas.modifiedCount === 0){ // nModified devuelve cuantas tareas se modificaron, si es 0 devolvemos 404
-      res.status(404).json({message: "No hay tareas pendientes para actualizar",})}
-
+    if (tareasActualizadas.modifiedCount === 0) {
+      // nModified devuelve cuantas tareas se modificaron, si es 0 devolvemos 404
+      res
+        .status(404)
+        .json({ message: "No hay tareas pendientes para actualizar" });
+    }
 
     res.status(200).json({
-      message: `Se actualizaron ${tareasActualizadas.modifiedCount} tareas a estado 'completada'`
-    })
-}catch(error){
-    console.log(error)
-    res.status(400).json({ message: "Error al actualizar las tareas", error: error.message });
+      message: `Se actualizaron ${tareasActualizadas.modifiedCount} tareas a estado 'completada'`,
+    });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(400)
+      .json({
+        message: "Error al actualizar las tareas",
+        error: error.message,
+      });
   }
-}
+};
 
 /**
  * Asi seria en SQLServer:
@@ -145,21 +162,23 @@ const actualizarTareasPendientes = async (req, res) => {
 const eliminarTareasPorUsuario = async (req, res) => {
   const { idUsuario } = req.params;
   try {
-    const tareasEliminadas = await Tarea.deleteMany(
-      { usuario: idUsuario }
-    )
+    const tareasEliminadas = await Tarea.deleteMany({ usuario: idUsuario });
 
-    if(tareasEliminadas.deletedCount === 0){
-      res.status(404).json({message: 'No hay tareas para eliminar en este usuario'})
+    if (tareasEliminadas.deletedCount === 0) {
+      res
+        .status(404)
+        .json({ message: "No hay tareas para eliminar en este usuario" });
     }
     res.status(200).json({
-      message: `Se eliminaron ${tareasEliminadas.deletedCount} tareas del usuario`})
-
-    }catch (error) {
-    console.log(error)
-    res.status(400).json({ message: 'Error al borrar las tareas', error: error.message })
+      message: `Se eliminaron ${tareasEliminadas.deletedCount} tareas del usuario`,
+    });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(400)
+      .json({ message: "Error al borrar las tareas", error: error.message });
   }
-}
+};
 
 /**
  * Asi seria en SQLServer:
@@ -167,28 +186,36 @@ const eliminarTareasPorUsuario = async (req, res) => {
     WHERE usuarioId = @idUsuario AND estado = @estado;
  */
 const eliminarTareaPorEstado = async (req, res) => {
-  const {idUsuario} = req.params // Lo sacamos del parametro que pasamos por URL
-  const {estado} = req.body // Lo sacamos del cuerpo de la solicitud
-  try{
-    const tareasEliminadas = await Tarea.deleteMany(
-      {usuario: idUsuario, estado: estado})
+  const { idUsuario } = req.params; // Lo sacamos del parametro que pasamos por URL
+  const { estado } = req.body; // Lo sacamos del cuerpo de la solicitud
+  try {
+    const tareasEliminadas = await Tarea.deleteMany({
+      usuario: idUsuario,
+      estado: estado,
+    });
 
-    if(tareasEliminadas.deletedCount === 0){
-      res.status(404).json({ message: `No hay tareas por eliminar en el estado: ${estado}`})
+    if (tareasEliminadas.deletedCount === 0) {
+      res
+        .status(404)
+        .json({
+          message: `No hay tareas por eliminar en el estado: ${estado}`,
+        });
     }
     res.status(200).json({
-      message: `Se eliminaron ${tareasEliminadas.deletedCount} tareas del usuario en estado ${estado}`
-    })
-  }catch(error){
-    console.log(error)
-    res.status(404).json({message: 'Error al borrar las tareas', error: error.message})
+      message: `Se eliminaron ${tareasEliminadas.deletedCount} tareas del usuario en estado ${estado}`,
+    });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(404)
+      .json({ message: "Error al borrar las tareas", error: error.message });
   }
-}
+};
 
 /**
  * Asi seria en SQLServer:
- * DELETE FROM Tareas WHERE id = 1; 
- * */ 
+ * DELETE FROM Tareas WHERE id = 1;
+ * */
 const eliminarTarea = async (req, res) => {
   const { id } = req.params;
   try {
@@ -204,6 +231,62 @@ const eliminarTarea = async (req, res) => {
   }
 };
 
+/**
+ * Paginacion: Técnica que divide los resultados en páginas para enviarlos poco a poco y mejorar el rendimiento de la API.
+ */
+
+const obtenerTareasPaginadas = async (req, res) => {
+  try {
+    const { pagina = 1, limite = 10 } = req.query; // Si el usuario no envía los parámetros en la URL, pagina será 1 y limite será 10 por defecto.
+    const skip = (pagina - 1) * limite; // La primera página (pagina = 1) no debe saltar ninguna tarea (skip = 0)
+
+    const tareas = await Tarea.find() // find porque queremos obtener todas las tareas, pero aplicando paginación
+      .skip(Number(skip)) // Saltamos los documentos anteriores
+      .limit(Number(limite)) // Limitamos la cantidad de resultados por página
+      // Los valores de req.query llegan como strings, y MongoDB necesita números por eso el Number
+
+    const totalTareas = await Tarea.countDocuments(); // Cantidad total de tareas en la BD
+    const totalPaginas = Math.ceil(totalTareas / limite); // Cantidad total de páginas, con math.ceil se redondea hacia arriba en el caso de que la division de numero decimal
+
+    res.status(200).json({
+      pagina: Number(pagina), // Convertimos a número
+      limite: Number(limite),
+      totalPaginas,
+      totalTareas,
+      tareas // Devolvemos las tareas encontradas
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener tareas paginadas", error: error.message });
+  }
+};
+
+const obtenerTareasPaginadasPorUsuario = async (req, res) => {
+  try {
+    const {idUsuario} = req.params
+    const { pagina = 1, limite = 10 } = req.query; 
+
+    const skip = (pagina - 1) * limite
+    
+    const tareas = await Tarea.find({ usuario: idUsuario})
+    .skip(Number(skip))
+    .limit(Number(limite))
+
+    const totalTareas = await Tarea.countDocuments({usuario: idUsuario})
+    const totalPaginas = Math.ceil(totalTareas/limite)
+
+    res.status(200).json({
+      pagina: Number(pagina),
+      limite: Number(limite),
+      totalPaginas,
+      totalTareas,
+      tareas
+    })
+  }catch (error){
+    res.status(500).json({ message: 'Error al obtener tareas paginas', error: error.message})
+  }
+}
+
+
 module.exports = {
   crearTarea,
   obtenerTarea,
@@ -212,5 +295,7 @@ module.exports = {
   eliminarTarea,
   actualizarTareasPendientes,
   eliminarTareasPorUsuario,
-  eliminarTareaPorEstado
+  eliminarTareaPorEstado,
+  obtenerTareasPaginadas,
+  obtenerTareasPaginadasPorUsuario
 };
