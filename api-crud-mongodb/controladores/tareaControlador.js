@@ -156,6 +156,7 @@ const eliminarTareasPorUsuario = async (req, res) => {
       message: `Se eliminaron ${tareasEliminadas.deletedCount} tareas del usuario`})
 
     }catch (error) {
+    console.log(error)
     res.status(400).json({ message: 'Error al borrar las tareas', error: error.message })
   }
 }
@@ -178,8 +179,9 @@ const eliminarTareaPorEstado = async (req, res) => {
     res.status(200).json({
       message: `Se eliminaron ${tareasEliminadas.deletedCount} tareas del usuario en estado ${estado}`
     })
-  }catch(e){
-    res.status(404).json({message: 'Error al borrar las tareas', error})
+  }catch(error){
+    console.log(error)
+    res.status(404).json({message: 'Error al borrar las tareas', error: error.message})
   }
 }
 
