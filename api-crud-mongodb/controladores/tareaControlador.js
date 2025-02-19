@@ -98,11 +98,13 @@ const actualizarTarea = async (req, res) => {
       res
         .status(200)
         .json({ message: "Tarea actualizada con exito", tareaActualizada });
-    } catch (e) {
-      res.status(400).json({ message: "Error al actualizar la tarea", error });
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ message: "Error al actualizar la tarea", error: error.message });
     }
-  } catch (e) {
-    res.status(400).json({ message: "Error al actualizar la tarea", error });
+  } catch (error) {
+    console.log(error)
+    res.status(400).json({ message: "Error al actualizar la tarea", error: error.message });
   }
 };
 
@@ -116,19 +118,22 @@ const actualizarTarea = async (req, res) => {
 const actualizarTareasPendientes = async (req, res) => {
   const {idUsuario} = req.params
   try{
-    const tareasActualizadas = await Tarea.updateMany( // Con updateMany actualizamos muchas tareas  la vez
+    const tareasActualizadas = await Tarea.updateMany( // Con updateMany actualizamos muchas tareas ala vez
       {usuario: idUsuario, estado: "pendiente"}, // Filtro si el estado de la tarea es pendiente
       {$set: {estado: 'completada'}} // Con $set asignamos al estado a completada
     )
 
-    if(tareasActualizadas.nModified === 0){ // nModified devuelve cuantas tareas se modificaron, si es 0 devolvemos 404
+
+    if(tareasActualizadas.modifiedCount === 0){ // nModified devuelve cuantas tareas se modificaron, si es 0 devolvemos 404
       res.status(404).json({message: "No hay tareas pendientes para actualizar",})}
 
+
     res.status(200).json({
-      message: `Se actualizaron ${tareasActualizadas.nModified} tareas a estado 'completada'`
+      message: `Se actualizaron ${tareasActualizadas.modifiedCount} tareas a estado 'completada'`
     })
-}catch(e){
-    res.status(400).json({ message: "Error al actualizar las tareas", error });
+}catch(error){
+    console.log(error)
+    res.status(400).json({ message: "Error al actualizar las tareas", error: error.message });
   }
 }
 
@@ -151,7 +156,7 @@ const eliminarTareasPorUsuario = async (req, res) => {
       message: `Se eliminaron ${tareasEliminadas.deletedCount} tareas del usuario`})
 
     }catch (error) {
-    res.status(400).json({ message: 'Error al borrar las tareas', error })
+    res.status(400).json({ message: 'Error al borrar las tareas', error: error.message })
   }
 }
 
