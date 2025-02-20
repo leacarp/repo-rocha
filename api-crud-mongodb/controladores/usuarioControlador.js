@@ -1,5 +1,8 @@
 // La carpeta controladores/controllers es donde hacemos las operaciones CRUD
 const Usuario = require("../modelos/usuarioModelo");
+const jwt = require('jsonwebtoken');
+require('dotenv').config()
+const secret = process.env.JWT_SECRET
 
 const crearUsuario = async (req, res) => {
   try {
@@ -59,9 +62,30 @@ const eliminarUsuario = async (req, res) => {
   }
 };
 
+const validarLogin = async (req, res) => {
+  const { correo, contraseña } = req.body; // Se recibe el correo y la contraseña desde req.body.
+  try {
+    const usuario = await Usuario.findOne({ correo }); // Busca el correo en la colección usuarios
+
+    if(!usuario || usuario.contraseña !== contraseña){ // Si el usuario no existe o la contraseña es incorrecta, se responde con 401 Unauthorized.
+      return res.status(401).json({ message: "Credenciales inválidas"})
+    }
+    const token = jwt.sign(
+      { id: usuario._id, correo: usuario.correo }, // Cuando incluimos el id y el correo en el payload lo que hacemos es vincular al usuario con su token, ademas podemos saber quien esta haciendo la peticion 
+      secret,
+      { expiresIn: "3h" }
+    )
+
+    res.json({message: 'Login exitoso', token}) // El JWT se envía como respuesta para que el usuario lo use en futuras peticiones.
+  } catch (error) {
+    res.status(500).json({message: 'Error en el servidor'})
+  }
+}
+
 module.exports = {
   crearUsuario,
   obtenerUsuario,
   actualizarUsuario,
   eliminarUsuario,
+  validarLogin,
 };

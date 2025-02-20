@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const validarJWT = require('../middlewares/validarToken')
 const {
   validarCreacionTarea,
   validarActualizarTarea,
@@ -22,7 +23,7 @@ const {
 } = require("../controladores/tareaControlador");
 
 
-router.get("/tareas", obtenerTarea);
+router.get("/tareas", validarJWT, obtenerTarea);
 router.get("/tareas/paginadas", obtenerTareasPaginadas)
 router.get("/tareas/usuario/:idUsuario", validarIdUsuario, manejarErrores, obtenerTareasPorUsuario);
 router.get("/tareas/usuario/:idUsuario/paginadas", validarIdUsuario, manejarErrores, obtenerTareasPaginadasPorUsuario)

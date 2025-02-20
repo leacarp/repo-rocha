@@ -6,6 +6,7 @@ const {
   obtenerUsuario,
   actualizarUsuario,
   eliminarUsuario,
+  validarLogin
 } = require("../controladores/usuarioControlador");
 const manejarErrores = require('../middlewares/manejarErrores')
 const {
@@ -18,6 +19,7 @@ const {
 
 router.get("/usuarios", obtenerUsuario);
 router.post("/usuarios", validarCreacionUsuario, manejarErrores, crearUsuario);
+router.post("/usuarios/login", validarLogin)
 router.put("/usuarios/:id", validarActualizarUsuario, manejarErrores, actualizarUsuario);
 router.delete("/usuarios/:id", validarUsuario, manejarErrores, eliminarUsuario);
 

@@ -282,7 +282,7 @@ const obtenerTareasPaginadasPorUsuario = async (req, res) => {
       tareas
     })
   }catch (error){
-    res.status(500).json({ message: 'Error al obtener tareas paginas', error: error.message})
+    res.status(500).json({ message: 'Error al obtener tareas paginadas', error: error.message})
   }
 }
 
