@@ -1,0 +1,19 @@
+instalar dependencias -> express, express-validator, mongoose, jsonwebtoken, dotenv, nodemon, bcryptjs 
+crear el .gitignore -> no subir el node_modules ni el .env
+crear el .env > el puerto, url de mongo, la clave secreta de jwt
+carpetas -> routes, controllers, models, middlewares, config
+conexion a la bdd -> mongoose, dotenv (url), async/await, exportamos
+archivo principal -> llamar a la conexion a la bdd, importar las rutas de los modelos (/api, ..) y escuchar puerto
+models -> mongoose.schema, ({nombre: {condiciones}}), type: mongoose.Schema.Types.ObjectId, ref: 'foreign key', definir nombre de modelo y exportarlo
+routes -> express, router, importamos: middlewares y controladores, definimos rutas y exportamos el router
+middleware express -> {body, param}, =[body('')/param('').condicion()], exportamos
+middleware validationResult -> (req, res, next) si los errores son distintos a vacio = error sino next(), exportamos
+middleware token ->  jwt, dotenv, clave secreta, (req, res, next), header('Authorization'), no hay token = error, const tokenWithoutBearer = token.replace('Bearer ', '').trim(), verificar token y clave, guardamos el payload en req.usuario, next(), sino error al validaar token
+middleware roles -> (...roles), si no concide el modelo.rol o tampoco no hay ni un solo rol incluido (!roles.some(role => usuario.roles.include(role))) error sino next()
+controllers crear -> await nuevoModelo.save(), encriptamos la contraseña genSalt(10), await bcrypt.hash y le asignamos a la contraseña la nueva encriptada
+controllers obtener -> await Modelo.find()
+controllers actualizar -> await Modelo.findByIdAndUpdate(id, {nuevos, datos}, {new: true}
+controllers eliminar -> await Modelo.findByIdAndDelete(id)
+controllers login -> correo y contraseña del body, await Modelo.findOne({correo}), condicion usuario no existente y contraseña compararla con await bcrypt.compare (contraseña (de body), modelo.contraseña (lo traemos de la base de datos), crear token = jwt.sign(payload, clave secreta, tiempo de expiracion)
+controllers paginadas -> pagina = x, limite = x. skip = (pagina-1)*limite. await Modelo.find() .skip/.limit. await Modelo.countDocuments/Math.ceil(totaltareas/limite)
+exportar controladores 
