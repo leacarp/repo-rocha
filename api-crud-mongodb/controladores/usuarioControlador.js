@@ -1,16 +1,20 @@
 // La carpeta controladores/controllers es donde hacemos las operaciones CRUD
 const Usuario = require("../modelos/usuarioModelo");
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 require('dotenv').config()
 const secret = process.env.JWT_SECRET
 
 const crearUsuario = async (req, res) => {
   try {
-    const { nombre, correo, contraseña } = req.body;
-    const nuevoUsuario = new Usuario({ nombre, correo, contraseña });
+    const { nombre, correo, contraseña, roles } = req.body;
+    const salt = await bcrypt.genSalt(10) // "salt" (una cadena aleatoria)
+    const contraseñaEncriptada = await bcrypt.hash(contraseña, salt)
+    const nuevoUsuario = new Usuario({ nombre, correo, contraseña: contraseñaEncriptada, roles });
     await nuevoUsuario.save(); // El método save() se utiliza para guardar un nuevo documento, sería como un INSERT INTO para agregar un nuevo registro en una tabla.
     res.status(201).json({ message: "Usuario creado con exito", nuevoUsuario });
   } catch (error) {
+    console.log(error)
     res.status(400).json({ message: "Error al crear el usuario", error });
   }
 };
@@ -26,13 +30,13 @@ const obtenerUsuario = async (req, res) => {
 
 const actualizarUsuario = async (req, res) => {
   const { id } = req.params;
-  const { nombre, correo, contraseña } = req.body;
+  const { nombre, correo, contraseña, roles } = req.body;
 
   try {
     const usuarioActualizado = await Usuario.findByIdAndUpdate(
       // Sería como un UPDATE donde buscas un registro por su id y luego actualizas los valores.
       id, // El identificador único del documento que quieres actualizar
-      { nombre, correo, contraseña }, // Los nuevos datos que quieres poner en el documento.
+      { nombre, correo, contraseña, roles }, // Los nuevos datos que quieres poner en el documento.
       { new: true } // Indica a Mongoose que te devuelva el documento actualizado, no el documento original antes de la actualización.
     );
     if (!usuarioActualizado) {
@@ -67,11 +71,16 @@ const validarLogin = async (req, res) => {
   try {
     const usuario = await Usuario.findOne({ correo }); // Busca el correo en la colección usuarios
 
-    if(!usuario || usuario.contraseña !== contraseña){ // Si el usuario no existe o la contraseña es incorrecta, se responde con 401 Unauthorized.
-      return res.status(401).json({ message: "Credenciales inválidas"})
+    if(!usuario){
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    const contraseñaCorrecta = await bcrypt.compare(contraseña, usuario.contraseña) // Verifica si la contraseña proporcionada coincide con la contraseña encriptada en la base de datos.
+    if(!contraseñaCorrecta){
+      return res.status(401).json({ message: "Contraseña incorrecta" });
     }
     const token = jwt.sign(
-      { id: usuario._id, correo: usuario.correo }, // Cuando incluimos el id y el correo en el payload lo que hacemos es vincular al usuario con su token, ademas podemos saber quien esta haciendo la peticion 
+      { id: usuario._id, correo: usuario.correo, roles: usuario.roles }, // Cuando incluimos el id y el correo en el payload lo que hacemos es vincular al usuario con su token, ademas podemos saber quien esta haciendo la peticion 
       secret,
       { expiresIn: "3h" }
     )

@@ -7,6 +7,7 @@ const usuarioSchema = new mongoose.Schema({
   nombre: { type: String, required: true },
   correo: { type: String, required: true, unique: true },
   contraseña: { type: String, required: true },
+  roles: {type: String, enum: ["admin", "user"], default: "user", required: true},
   tareas: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tarea" }], // mongoose.Schema.Types.ObjectId es como una foreign key, al ponerlo en un array seria una relacion de uno a muchos, con el ref indicamos al modelo que hacemos referencia
 });
 
