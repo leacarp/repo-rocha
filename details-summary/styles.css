@@ -1,0 +1,14 @@
+body{
+    background-color: #222;
+    color: #ccc;
+    font-family: sans-serif;
+}
+details{
+    background-color: transparent;
+    border: 1px solid #ccc;
+    padding: 9px;
+}
+
+summary{
+    background-color: transparent;
+}

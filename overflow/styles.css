@@ -1,0 +1,20 @@
+body{
+    margin: 0px;
+    font-family: sans-serif;
+    background-color: #ccc;
+}
+
+.box{
+    width: 220px;
+    height: 220px;
+    background-color: #ddd;
+    color: red;
+    position: relative;
+    border: 2px solid #000;
+    margin: auto;
+    margin-top: 50px;
+    overflow: auto; /*Hacemos que el contenido se ajuste y se muestre un scroll*/
+    /* overflow: hidden; /*El contenido se ajusta y lo que no quepa se oculta*/
+    /* overflow: visible; /*Se muestra todo el contenido desbordando la caja*/
+    /* overflow: scroll; Se muestra el scroll*/
+}

@@ -1,0 +1,47 @@
+h1{
+    color: #48e;
+    font-family: sans-serif;
+    margin: 30px;
+}
+
+/*Cuando se pase el mouse por encima de la etiqueta*/
+h1:hover{
+    color: #3bf;
+    background-color: #ddd;
+}
+
+/*Mientras se haga click sobre la etiqueta*/
+h1:active{
+    background-color: #aaa;
+    color: #fff
+}
+
+/*Seleccionando el primer elemento de li*/
+li:first-child{
+    color: #e25
+}
+
+/*Seleccionando el elemento que queramos modificar de li*/
+li:nth-child(2){
+    color: #60d
+}
+
+/*Seleccionando cada cuantos elementos queremos que se modifique (podemos saltear elementos, ej: se modifica de 2 en 2, en este caso de 4 en 4)*/
+li:nth-child(4n){
+    color: #27f
+}
+
+/*Seleccionando el ultimo elemento de li*/
+li:last-child{
+    color: #7d3
+}
+
+/*Seleccionando enlaces no visitados*/
+a:link{
+    color: #f00;
+}
+
+/*Seleccionando enlaces visitados*/
+a:visited{
+    color: #0c0
+}

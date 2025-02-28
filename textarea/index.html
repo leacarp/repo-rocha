@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textarea</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <form>
+        <h2>Formulario de contacto</h2>
+
+        <!-- Input text y email-->
+        <div class="form_input">
+            <label>Nombre
+                <input type="text" placeholder="Escribe tu nombre">
+            </label>
+        </div>
+        <div class="form_input">
+            <label>Email
+                <input type="email" placeholder="Escribe tu email">
+            </label>
+        </div>
+
+        <!-- Select & option -->
+        <div class="form_input">
+            <label>Tipo de usuario
+                <select name="type-of-user">
+                    <option value="user1">Alumno</option>
+                    <option value="user2">Profesor</option>
+                    <option value="user3">Otros</option>
+                </select>
+            </label>
+        </div>
+
+        <!-- Datalist & option -->
+        <div class="form_input">
+            <label>Referente
+                <input list="referente" name="referente">
+                <datalist id="referente" name="type-of-user">
+                    <option value="Empresa">Una empresa del rubro IT</option>
+                    <option value="Redes">Instagram/Facebook/Twitter</option>
+                    <option value="Otros">No lo recuerdo</option>
+                </datalist>
+            </label>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form_input">
+            <label>Mensaje
+                <textarea rows="8" placeholder="Escribe tu mensaje..."></textarea>
+            </label>
+        </div>
+        <div class="form_input">
+            <label>Acepto los <a href="terms.html" target="_blank">terminos y condiciones</a>
+                <input type="checkbox" class="checkbox">
+            </label>
+        </div>
+
+    </form>
+</body>
+</html>

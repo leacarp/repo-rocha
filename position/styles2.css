@@ -1,0 +1,34 @@
+body{
+    margin: 0px;
+    font-family: sans-serif;
+    background-color: #ccc;
+}
+
+.container{
+    margin: 20px;
+    border: 2px solid #222;
+    position: relative; /*Definimos el container como relativo para que las cajas puedan moverse*/
+}
+
+.box{
+    color: #eee;
+    width: 150px;
+    height: 150px;
+    background-color: #ca6;
+}
+
+.box-blue{
+    background-color: #48e;
+    position: absolute; /*Se saca del flujo normal del documento, lo que significa que otros elementos se comportarán como si no existiera.*/
+    /*top: 0;
+    left: 0; --> Si no definimos una caja como relativa, el absolut va a tomar la posicion de la caja padre HTML*/
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+.box-red{
+    background-color: #e53;
+}

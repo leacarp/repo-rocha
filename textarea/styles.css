@@ -1,0 +1,60 @@
+body{
+    margin: 0px;
+    font-family: sans-serif;
+    color: #eee;
+    background-color: #222;
+}
+
+h2{
+    text-align: center;
+    margin: 0px;
+    margin-bottom: 10px;
+}
+
+form{
+    background-color: transparent;
+    padding: 20px 0;
+    max-width: 500px; /*Define el ancho maximo de la caja*/
+    margin: auto;
+    box-shadow: 0px 0px 55px rgba(0, 0, 0, 0.9);
+    margin-top: 50px;
+    border-radius: 8px;
+}
+
+.form_input{
+    padding: 10px 20px;
+}
+
+input, textarea, select{
+    margin-top: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 12px;
+    border: none;
+    border: 1px solid #666;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
+    background-color: transparent;
+    border-radius: 4px;
+    color: #eee;
+}
+
+option{
+    background: #222;
+}
+
+textarea{
+    min-width: 100%;
+    min-height: 100px;
+    resize: none;
+    font-family: inherit;
+}
+
+.checkbox{
+    width: auto;
+    height: 10px;
+}
+
+a{
+    color: #69f;
+    text-decoration: none;
+}

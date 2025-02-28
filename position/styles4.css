@@ -1,0 +1,41 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.contenedor{
+    padding: 100px;
+    background-color: blue;
+    position: relative;
+}
+
+h2{
+    font-size: 18px;
+    margin: 0px;
+}
+
+p{
+    font-size: 14px;
+    margin: 0;
+}
+
+.box{
+    height: 60px;
+    width: 200px;
+    background-color: red;
+    position: fixed; /*Se mantiene fijo en la pantalla sin importar el scroll. Se posiciona en relación con la ventana del navegador (viewport), no con su contenedor*/
+    right: 0;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-right: 0;
+    box-shadow: 0px 0px 40px #0009;
+}
+
+.box-fixed{
+    height: 60px;
+    width: 200px;
+    background-color: red;
+    position: sticky; /*Se comporta como relative hasta que el scroll alcanza cierto punto de la pantalla, luego se comporta como fixed*/
+    top: 30px;
+    box-sizing: border-box;
+}

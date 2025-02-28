@@ -1,0 +1,21 @@
+body{
+    margin: 0px;
+    font-family: sans-serif;
+    background-color: #ccc;
+}
+
+.flexbox{
+    display: flex; 
+    flex-direction: row;
+    flex-wrap: wrap; /* flex-wrap: wrap permite que los elementos dentro del contenedor flex se mantengan en su tamaño original y, si no caben en una sola línea, se ajusten a una nueva línea en lugar de encogerse */
+    /*flex-flow: row wrap; -> es lo mismo que flex-direction y flex-wrap, solo que es una abreviatura*/
+}
+
+.flex-item{
+    background-color: #911;
+    margin: 10px;
+    color: #fff;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
