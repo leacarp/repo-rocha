@@ -1,0 +1,36 @@
+body{
+    font-family: sans-serif;
+}
+/* Con el corchete seleccionamos por atributo, con el $ seleccionamos por extension */
+img[src="https://media.istockphoto.com/id/496546118/es/foto/retrato-de-la-cocina-cl%C3%A1sica-italiana-original-de-pizza-de-chorizo-aislado.jpg?s=612x612&w=0&k=20&c=9SYXuSH1-UObbKJuFnzJ2ul02OvZ_cww2KM98hA2Wrg="]{
+    width: 70%;
+}
+
+/* Selector descendiente */
+ul li {
+    color: #aaa;
+    font-family: Montserrat;
+}
+
+/* Selector por hijo directo */
+li > strong{
+    color: #666;
+}
+
+/* Selector de hermano adyacente, un p que este a continuacion de un h1*/
+h1 + p{
+    color: #39f !important /*El important sobreescribe TODO el estilo aunque el atributo tenga otros estilos antes definididos, no respeta la cascada*/;
+}
+
+/* Selector de hermano general, a todos los p que esten a continuacion de un h1 */
+h1 ~ p{
+    color: #0c3;
+}
+
+/* Selector de un atributo o mas de uno para definirle el mismo estilo */
+h1, h2{
+    color: #455;
+    font-family: inherit; /*Con este atributo lo que hacemos es que hereden la fuente de la etiqueta padre*/
+}
+
+/*Especifidad = Etiqueta -> Clase -> Id*/

@@ -1,0 +1,26 @@
+body{
+    margin: 0px;
+    font-family: sans-serif;
+    background-color: #ccc;
+}
+
+.flexbox{
+    display: flex; /*Los elementos se alinean y se ajustan (son flexibles)*/
+    flex-direction: row; /*Los elementos se alinean horizontalmente de izquierda a derecha*/
+    flex-direction: row-reverse; /*Los elementos se alinean horizontalmente de derecha a izquierda*/
+    flex-direction: column; /*Los elementos se alinean verticalmente de arriba hacia abajo*/
+    flex-direction: column-reverse; /*Los elementos se alinean verticalmente de abajo hacia arriba*/
+    /* direction: rtl; Como leer el texto, right to left (no usado, solo los arabes)*/
+    direction: ltr; /*Como leer el texto, left to right*/
+}
+
+.flex-item{
+    width: 100px;
+    height: 100px;
+    background-color: #911;
+    margin: 10px;
+}
+
+.flex-item:first-child{
+    background-color: #d56;
+}

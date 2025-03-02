@@ -1,0 +1,46 @@
+body{
+    margin: 0px;
+}
+
+div{
+    padding: 20px;
+    background-color: #999;
+}
+
+a{
+    background-color: #ccc;
+    color: #222;
+    display: block; /*Convertimos un elemento en linea como "a" a un bloque, esto hace que ahora ocupe todo el ancho de la pantalla y comienza una nueva linea, acepta margen, padding*/
+    margin: 20px;
+}
+
+p{
+    background-color: #000;
+    color: #fff;
+    display: inline; /*Convertimos un elemento en bloque como "p" a un elemento en linea, el margin y el padding no afectan verticalmente pero si horizontalmente, ocupa solo el tamaño del contenido y no inicia en una nueva línea*/
+    margin: 5px;
+    padding: 5px;
+}
+
+.nav{
+    background-color: #48e;
+}
+
+.nav__list{
+    margin: 0;
+}
+
+.nav__item{
+    display: inline-block; /*Similar a inline, pero permite modificar dimensiones con width y height*/
+    padding: 10px;
+}
+
+.nav__item:hover{
+    background-color: #59e;
+}
+
+.nav__link{
+    background-color: #48e;
+    color: #fff;
+    text-decoration: none;
+} 

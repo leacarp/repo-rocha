@@ -1,0 +1,16 @@
+body{
+    margin: 0px;
+    font-family: sans-serif;
+}
+
+img{
+    width: 400px;
+    height: 200px;
+    /* object-fit: fill; Propiedad por defecto es fill, no mantiene relacion/aspecto, solo se ajusta al contenido (no recomendada)*/
+    object-fit: contain; /*Se va adaptando para que al menos una valor se muestre al 100%*/
+    /* object-fit: cover; Se adapta al tamaño de la caja*/
+    /* object-fit: none; Mantiene su relacion original sin cambiar su tamaño*/
+    border: 2px solid #000;
+    margin-top: 70px;
+    margin-left: 15px;
+}

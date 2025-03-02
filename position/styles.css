@@ -1,0 +1,26 @@
+body{
+    margin: 0px;
+    background-color: #ccc;
+}
+.box{
+    color: #eee;
+    width: 150px;
+    height: 150px;
+    background-color: #823;
+    position: relative; /*El elemento se posiciona en relación a su posición original, sigue ocupando su espacio normal, pero puedes moverlo con top, left, right o bottom sin afectar a los demás elementos.*/
+    z-index: 10;
+}
+
+.box-blue{
+    background-color: blue;
+    top: 100px; /*Top y left son la mayor prioridad, si definimos estos 2 no es necesario definir bottom y right, se mueve al sentido contrario, si dijo left se va a mover a la derecha, si digo top se va a mover hacia abajo, etc..*/
+    left: 20px;
+    z-index: 20; /*Con esto hacemos que el elemento este por encima de otros elementos, podemos definir un z-index para cada elemento, si queremos que uno superponga a otro, simplemente le damos un valor mayor*/
+}
+
+.box:first-child{
+    background-color: #4a2;
+    top: 180px;
+    left: 50px;
+    z-index: 30;
+}
