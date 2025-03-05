@@ -1,0 +1,22 @@
+body{
+    margin: 0px;
+    font-family: sans-serif;
+}
+
+.flexbox{
+    display: flex;
+}
+
+.flex-item{
+    background-color: #ccc;
+    padding: 30px;
+    border: 1px solid red;
+    flex-grow: 1;
+}
+
+/*Lo que hacemos con la etiqueta @media es la regla que inicia la media-querie despues el mediatype seria al tipo de medio que se dirige la consulta que puede ser screen o print y despues el and con la expresion, en este caso decimos que si la resolucion es menor a 480px la caja se convierte en una columna*/
+@media screen and (max-width: 480px){
+    .flexbox{
+        flex-direction: column;
+    }
+}

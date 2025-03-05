@@ -1,0 +1,23 @@
+body{
+    margin: 0px;
+    font-family: sans-serif;
+    background-color: #ccc;
+}
+
+/*Con el support lo que hacemos es definir un estilo suponiendo que el navegador soporta la propiedad*/
+@supports (display: grid){
+    body{
+        display: grid;
+        grid-template-columns: auto;
+    }
+}
+
+/*En el caso de que no la definimos de esta manera dandole un nuevo estilo*/
+@supports not (display: grid){
+    body{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        flex-basis: 0;
+    }
+}

@@ -1,0 +1,22 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/*Cuando le damos la propiedad inline-size a un contenedor nos permite hacer un querie y poder trabajar sobre ese contendor y darle estilo*/
+.container{
+    container-name: main; /*Le asignamos un nombre para poder acceder solo a ese contendor sin modificar todos*/
+    container-type: inline-size;
+}
+
+p{
+    font-size: 10px;
+}
+
+@container main (max-width: 600px){
+    p{
+        font-size: 20px;
+        color: #f00;
+        background-color: #000;
+    }
+}

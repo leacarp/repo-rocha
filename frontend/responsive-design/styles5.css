@@ -1,0 +1,53 @@
+/*Este es el estilo base para dispositivos moviles*/
+body{
+    margin: 0px;
+    font-family: sans-serif;
+    background-color: #ccc;
+    text-align: center;
+}
+
+header{
+    background-color: #333;
+    color: white;
+    padding: 10px;
+}
+
+.content{
+    padding: 20px;
+}
+
+footer{
+    background-color: #222;
+    color: white;
+    bottom: 0;
+    padding: 10px;
+}
+
+/*Estilo para tablet con un mayor ancho*/
+@media screen and (min-width: 768px){
+    body{
+        font-size: 18px;
+        background-color: #eee;
+    }
+
+    .content{
+        max-width: 600px;
+        margin: auto;
+    }
+}
+
+/*Estilo para desktop*/
+@media screen and (min-width: 1024px){
+    body{
+        font-size: 20px;
+        background-color: #ddd;
+    }
+
+    header{
+        padding: 20px;
+    }
+
+    .content{
+        max-width: 800px;
+    }
+}

@@ -1,0 +1,43 @@
+body{
+    margin: 0px;
+    font-family: sans-serif;
+    background-color: #ccc;
+}
+
+div, body{
+    box-sizing: border-box;
+}
+.flexbox{
+    background-color: #fff;
+    display: flex;
+    flex-flow: row nowrap;
+    border: 2px solid black;
+    margin: 20px;
+    height: 100px;
+    align-content: center; 
+    justify-content: space-evenly; 
+}
+
+.flex-item{
+    background-color: #800;
+    margin: 10px;
+    color: #fff;
+    font-size: 40px;
+    text-align: center;
+    flex-grow: 1; /* Define cuánto puede crecer un elemento para ocupar el espacio disponible dentro de un contenedor flex.  
+    - Si todos los elementos tienen flex-grow en 1, el espacio extra se distribuye equitativamente.  
+    - Si un elemento tiene un valor mayor, crecerá más en comparación con los demás.  
+    - Si es 0, el elemento no crecerá más allá de su tamaño inicial. */ 
+    flex-shrink: 1; /* Define cuánto puede reducirse un elemento para ocupar el espacio disponible dentro de un contenedor flex.*/
+    flex-basis: 180px; /* Define el tamaño inicial del elemento antes de aplicar grow o shrink. */
+    gap: 10px; /*Cuantos espacios hay entre los elementos*/
+}
+
+.flex-item:first-child{
+    background-color: #f55;
+    flex-shrink: 3; /*Cuantas veces mas va a encogerse el elemento*/ 
+}
+
+.flex-item:last-child{
+    background-color: #111;
+}

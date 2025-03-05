@@ -1,0 +1,26 @@
+h1::first-letter{
+    color: #2a0
+}
+
+div::first-line{
+    color: red;
+}
+
+input::placeholder{
+    background-color: #ddd;
+    color: #444;
+}
+
+li::marker{
+    color: #280;
+}
+
+p::before{
+    content: 'Texto antes, inicio: ';
+    color: #48e
+}
+
+p::after{
+    content: ' Texto terminacion, final';
+    color: #2a4
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ingredientes</h1>
+    <!--Metodologia BEM la utilizamos para reutilizar codigo, con la segunda clase que la pasamos a la etiqueta definimos que vamos a modificar solamente esa sin interrumpir su diseño definido con anterioridad-->
+    <ul class="lista">
+        <li class="lista__item item--danino">Sal</li>
+        <li class="lista__item">Papa</li>
+        <li class="lista__item item--importante">Harina</li>
+        <li class="lista__item">Agua</li>
+    </ul>
+    <!--Aca hacemos lo mismo pero con la lista directamente, antes solo con 2 items-->
+    <ul class="lista lista--vieja">
+        <li class="lista__item item--danino">Sal</li>
+        <li class="lista__item">Zanahoria</li>
+        <li class="lista__item item--importante">Harina</li>
+        <li class="lista__item">Agua</li>
+    </ul>
+</body>
+</html>

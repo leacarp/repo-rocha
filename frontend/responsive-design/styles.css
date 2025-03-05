@@ -1,0 +1,30 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+div, body{
+    box-sizing: border-box;
+}
+
+.flexbox{
+    display: flex; /*Lo que hacemos al definir que los elementos sean flexibles es que puedan adaptarse siempre intentado tener su maximo de ancho pero manteniendo su minimo establecido*/
+    flex-wrap: wrap; /*Si las cajas no caben en una sola linea se ajustan tirandose hacia abajo*/
+    justify-content: center; /*Los elementos crecen pero siempre se mantienen en el centro*/
+    max-width: 600px;
+    margin: auto;
+}
+
+.bloque{
+    display: inline-block;
+    min-width: 400px; /*Lo que hacemos es definir un ancho minimo y un maximo de la caja, 
+    asi puede adaptarse el contenido*/
+    /*No es recomendable definir un height, ya que pueden quedar espacios vacios o se pueden desbordar, es mejor no definirlo o en el caso de que sea necesario, definir un min-height*/
+    background-color: #6af;
+    margin: auto;
+    flex-grow: 1; /*Con grow le permitimos ocupar todo el ancho disponible*/
+    flex-basis: 0; /*Con basis le permitimos definir el ancho inicial de la caja*/
+    padding: 10px;
+    margin: 4px;
+    font-size: 10px;
+}

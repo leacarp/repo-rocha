@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--Funciona igual que el srcet y el size visto anteriormente, y es hasta mas recomendable hacerlo asi, hay que hacerlo en orden, ir poniendo de menos pixeles a mas, en el caso de que ninguna de las 2 condiciones se cumplan se muestra la ultima imagen-->
+    <picture>
+        <source media="(max-width:500px)"
+        srcset="river-small.png">
+        <source media="(min-width: 900px)" 
+        srcset="river-medium.png">
+        <img src="river.png"> 
+    </picture>
+</body>
+</html>

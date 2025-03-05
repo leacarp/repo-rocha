@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles3.css">
+</head>
+<body>
+    <!--Lo que hacemos con srscet es asignar una imagen distinta de acuerdo a la resolucion de la pantalla, por ejemplo: lo que hacemos es mostrar la imagen river-small cuando el tamaño de la pantalla es de hasta 400px -->
+    <img src="river-small.png"
+    srcset="river-small.png 400w, river-medium.png 800w, river.png 1200w"
+    sizes="max-width(500px) 400px, max-width(900px) 800px 1200px">
+    <!--Sizes funciona solo con srcset definido, lo que hace es recomendar al navegador cuales son los maximos de altura con los que puede trabajar; si el max-width es de x pixeles, cargas una imagen que tengan mas o menos x pixeles -->
+</body>
+</html>

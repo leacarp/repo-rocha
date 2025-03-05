@@ -1,0 +1,9 @@
+body{
+    margin: 0px;
+    font-family: sans-serif;
+    background-color: #ccc;
+}
+
+div, body{
+    box-sizing: border-box;
+}

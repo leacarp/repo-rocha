@@ -1,0 +1,26 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+div, body{
+    box-sizing: border-box;
+}
+
+img{
+    max-width: 100%; /*Al definir un ancho maximo del 100% hacemos que la imagen no crezca mas de lo que ocupa, adaptandose a cualquier dispositivo*/ 
+    height: auto; 
+}
+
+/*Como hacer un video flexible*/
+
+/*
+.contenedor{
+    max-width: 100%;
+    aspect-ratio: 16/9;
+}
+
+video{
+    max-width: 100%;
+}
+*/

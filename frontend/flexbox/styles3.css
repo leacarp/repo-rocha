@@ -1,0 +1,46 @@
+body{
+    margin: 0px;
+    font-family: sans-serif;
+    background-color: #ccc;
+}
+
+div, body{
+    box-sizing: border-box;
+}
+.flexbox{
+    background-color: #fff;
+    display: flex;
+    flex-flow: row wrap;
+    border: 2px solid black;
+    margin: 20px;
+    height: 100px;
+    align-content: center; /* Alinea las líneas de un contenedor flexbox en el eje transversal cuando hay varias filas. Solo tiene efecto cuando los elementos no caben en una sola línea */
+    justify-content: space-evenly; /* Alinea los elementos dentro de un contenedor en el eje principal
+    - flex-start: Alinea los elementos al inicio.
+    - flex-end: Alinea los elementos al final.
+    - center: Centra los elementos.
+    - space-between: Distribuye los elementos con el máximo espacio entre ellos.
+    - space-around: Agrega espacio alrededor de cada elemento.
+    - space-evenly: Distribuye el espacio de manera uniforme. */
+}
+
+.flex-item{
+    height: 50px;
+    width: 100px;
+    background-color: #800;
+    margin: 10px;
+    color: #fff;
+    font-size: 40px;
+    text-align: center;
+    order: 2; /*La propiedad order nos sirve para cambiar el orden de los elementos, por defecto vienen con 0, si le damos un mayor valor van a estar despues de los elemetos*/
+}
+
+.flex-item:first-child{
+    background-color: #f55;
+    order: 1;
+}
+
+.flex-item:last-child{
+    background-color: #111;
+    order: 0;
+}
