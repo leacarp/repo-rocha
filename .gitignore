@@ -1,7 +1,45 @@
+# Ignorar carpetas y proyectos que no se suben
 basico/
 node_modules/
 api-citas-celebres/
 api-clima-coordenadas/
 api-tareas-crud/
 api-crud-mongodb/
+mi-primer-vue/
+frontend/vue/
+
+# Ignorar archivos sensibles
 .env
+.env.local*
+
+# Ignorar dependencias y archivos generados en Quasar
+quasar-moneyballs/node_modules/
+quasar-moneyballs/.quasar/
+quasar-moneyballs/dist/
+quasar-moneyballs/quasar.config.*.temporary.compiled*
+
+# Ignorar Cordova
+quasar-moneyballs/src-cordova/node_modules/
+quasar-moneyballs/src-cordova/platforms/
+quasar-moneyballs/src-cordova/plugins/
+quasar-moneyballs/src-cordova/www/
+
+# Ignorar Capacitor
+quasar-moneyballs/src-capacitor/www/
+quasar-moneyballs/src-capacitor/node_modules/
+
+# Ignorar logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignorar archivos y configuraciones de editores
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Ignorar archivos del sistema
+.DS_Store
+.thumbs.db
